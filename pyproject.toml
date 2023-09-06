@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vector_storage_allocator"
+description = "Allocate storage with vectorial spaces"
+version = "0.1.0"
+authors = [
+    { name = "outscale", email = "francois.lebreau@outscale.com" }
+]
+dependencies = [
+    "requests"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pdbpp",
+]
+
+[project.scripts]
+generate_space = "vector.generate:main"
+allocate = "vector.allocate:main"
+
+[tool.setuptools]
+packages = ["vector"]
+
+[tool.autoflake]
+remove_all_unused_imports = true
+ignore_init_module_imports = true
+
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = 'black'
